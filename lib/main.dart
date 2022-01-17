@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       return BlocProvider(
         create: (_) => ClockScreenBlock(), 
         child: MaterialApp(
-            theme: new ThemeData(),
             home: ClockScreen(),
           )
       );
