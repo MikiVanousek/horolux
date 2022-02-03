@@ -3,11 +3,12 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:horolux/presets/hl_colors.dart';
 
 import 'clock_screen_state.dart';
 
 class ClockScreenBlock extends Bloc<Void, ClockScreenState> {
-  ClockScreenBlock() : super(new ClockScreenState(_timeString(DateTime.now()))) {
+  ClockScreenBlock() : super(ClockScreenState(_timeString(DateTime.now()), HLColors.background, HLColors.accent)) {
     _updateTime();
   }
   
@@ -22,13 +23,8 @@ class ClockScreenBlock extends Bloc<Void, ClockScreenState> {
             Duration(milliseconds: time.millisecond),
         _updateTime,
       );  
-      // Update once per second, but make sure to do it at the beginning of each
-      // new second, so that the clock is accurate.
-      // _timer = Timer(
-      //   Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
-      //   _updateTime,
-      // );
-    }
+  }
+
   static String _timeString(DateTime t){
     return (t.hour.toString() + ":" + t.minute.toString());
   }

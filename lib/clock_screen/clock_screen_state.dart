@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
+
 class ClockScreenState {
-  String time;
-  
-  ClockScreenState(this.time);
+  final String time;
+  final Color backgroundColor;
+  final Color textColor;
+
+  ClockScreenState(this.time, this.backgroundColor, this.textColor);
 }
