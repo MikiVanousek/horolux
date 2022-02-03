@@ -7,7 +7,7 @@ import 'package:horolux/clock_screen/clock_screen_state.dart';
 import 'package:horolux/presets/hl_colors.dart';
 
 
-class ClockScreenBlock extends Bloc<Void, ClockScreenState> {
+class ClockScreenBlock extends Cubit<ClockScreenState> {
   TimeOfDay wakeupTime; 
   final Duration lightDuration = Duration(minutes: 1); 
 
