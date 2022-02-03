@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       return BlocProvider(
-        create: (_) => ClockScreenBlock(null, Duration(seconds: 30)), 
+        create: (_) => ClockScreenBlock(null, Duration(hours: 2)), 
         child: const MaterialApp(
             home: ClockScreen(),
           )
