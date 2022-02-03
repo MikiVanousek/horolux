@@ -9,41 +9,41 @@ import 'package:horolux/presets/hl_colors.dart';
 
 class ClockScreenBlock extends Bloc<Void, ClockScreenState> {
   TimeOfDay wakeupTime; 
-  Duration lightDuration = new Duration(minutes: 1);
-  ClockScreenBlock() : super(ClockScreenState(_timeString(DateTime.now()), HLColors.background, HLColors.accent)) {
-    _updateTime();
-    // testing pourpuses
-    var now = TimeOfDay.now();
-    wakeupTime = TimeOfDay(hour: now.hour, minute: now.minute + lightDuration.inMinutes);
-  }
+  final Duration lightDuration = Duration(minutes: 1); 
+
+  ClockScreenBlock() : 
+    wakeupTime = TimeOfDay(hour: TimeOfDay.now().hour, minute: TimeOfDay.now().minute + 1),
+    super(ClockScreenState(_timeString(DateTime.now()), HLColors.background, HLColors.accent)) {
+      _updateTime();
+    }
   
   void _updateTime(){
       var time = DateTime.now();
       // Update once per minute. If you want to update every second, use the
       // following code.
       var _timer = Timer(
-        Duration(minutes: 1) -
-            Duration(seconds: time.second) -
-            Duration(milliseconds: time.millisecond),
+        Duration(seconds: 1) - 
+          Duration(milliseconds: time.millisecond),
         _updateTime
       );  
-
+      emit(_genState(time));
     }
   static String _timeString(DateTime t){
     return (t.hour.toString() + ":" + t.minute.toString());
   }
   
-  static ClockScreenState _genState(TimeOfDay time) {
-    var now = DateTime.now();
-    var timeString = _timeString(now);
-    var dtw = DateTime(now.year, now.month, now.day, wakeupTime.hour, wakeupTime.minute);
-    Color background;
-    if (now.add(this.lightDuration).isAfter(dtw)){
-      var progress = (now.microsecondsSinceEpoch - dtw.microsecondsSinceEpoch) / lightDuration.inMicroseconds;  
+  ClockScreenState _genState(DateTime time) {
+    var timeString = _timeString(time);
+    var dtw = DateTime(time.year, time.month, time.day, wakeupTime.hour, wakeupTime.minute);
+    Color background, text;
+    if (time.add(lightDuration).isAfter(dtw)){
+      var progress = 1-(dtw.millisecondsSinceEpoch - time.millisecondsSinceEpoch) / lightDuration.inMilliseconds;
       background = Color.lerp(HLColors.background, HLColors.accent, progress) ?? Colors.red;
+      text = progress > 0.5 ? HLColors.background : HLColors.accent;
     } else {
       background = HLColors.background; 
+      text = HLColors.accent;
     }
-    return ClockScreenState(timeString, background, HLColors.accent);
+    return ClockScreenState(timeString, background, text);
   }
 }

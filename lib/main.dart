@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:horolux/clock_screen/clock_screen.dart';
-import 'package:horolux/clock_screen/clock_screen_bloc.dart';
+import 'package:horolux/clock_screen_bloc.dart';
 
 
 void main() {
@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
       return BlocProvider(
         create: (_) => ClockScreenBlock(), 
-        child: MaterialApp(
+        child: const MaterialApp(
             home: ClockScreen(),
           )
       );
-  }qq
+  }
 }
