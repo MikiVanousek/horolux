@@ -2,10 +2,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:horolux/presets/hl_colors.dart';
 
 class HLTextstyles {
-  static TextStyle base = new TextStyle(
+  static final TextStyle base = TextStyle(
     color: HLColors.accent,
     decoration: TextDecoration.none,
-  );
+  ),
 
-  static TextStyle clock = base.copyWith(fontSize: 48);
+  clock = base.copyWith(fontSize: 48),
+  
+  label = base.copyWith(
+    fontSize: 24,
+    color: HLColors.accentDull,
+  ),
+  
+  labelAccent = label.copyWith(
+    color: HLColors.accent,
+  ),
+
+  display = base.copyWith(
+    fontSize: 96
+  ),
+
+  button = base.copyWith(
+    fontSize: 64,
+    color: HLColors.background,
+  )
+  ;
 }
