@@ -39,6 +39,7 @@ dependencies:
   fullscreen: ^1.0.3
   wakelock: ^0.6.1+1
   shared_preferences: ^2.0.13
+  flutter_material_pickers: ^3.1.2
 
 dev_dependencies:
   flutter_test:
