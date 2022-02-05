@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   fullscreen: ^1.0.3
   wakelock: ^0.6.1+1
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  test: ^1.17.12
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
