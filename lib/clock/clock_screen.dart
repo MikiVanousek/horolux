@@ -3,11 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:horolux/clock/clock_screen_bloc.dart';
 import 'package:horolux/clock/clock_screen_state.dart';
-import 'package:horolux/presets/hl_colors.dart';
 import 'package:horolux/presets/hl_text_styles.dart';
-import 'package:fullscreen/fullscreen.dart';
 import 'package:horolux/settings/settings.dart';
-import 'package:horolux/settings/settings_screen.dart';
 import 'package:horolux/settings/settings_screen_bloc.dart';
 import 'package:wakelock/wakelock.dart';
 
