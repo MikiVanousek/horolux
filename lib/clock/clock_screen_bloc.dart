@@ -50,6 +50,7 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
     emit(_genState(time));
   }
 
+  // TODO format properly with context and user prefs
   static String _timeString(DateTime t) {
     var h = t.hour.toString();
     if (h.length < 2) h += ' ';
@@ -61,12 +62,10 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
 
   ClockScreenState _genState(DateTime time) {
     var timeString = _timeString(time);
-    var dtw = DateTime(
-        time.year, time.month, time.day, wakeupTime.hour, wakeupTime.minute);
     Color background, text;
-    if (time.add(lightDuration).isAfter(dtw)) {
+    if (time.add(lightDuration).isAfter(wakeupTime)) {
       var progress = 1 -
-          (dtw.millisecondsSinceEpoch - time.millisecondsSinceEpoch) /
+          (wakeupTime.millisecondsSinceEpoch - time.millisecondsSinceEpoch) /
               lightDuration.inMilliseconds;
       background = Color.lerp(HLColors.background, HLColors.accent, progress) ??
           Colors.red;
