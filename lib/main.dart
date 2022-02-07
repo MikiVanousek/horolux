@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:horolux/clock/clock_screen.dart';
 import 'package:horolux/clock/clock_screen_bloc.dart';
+import 'package:horolux/presets/hl_colors.dart';
 import 'package:horolux/settings/settings_screen.dart';
 import 'package:horolux/settings/settings_screen_bloc.dart';
 
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-      return BlocProvider(
+    return BlocProvider(
         create: (_) => SettingsScreenBloc(),
-        child: const MaterialApp(
-            home: SettingsScreen(),
-          )
-      );
+        child: MaterialApp(
+          theme: HLColors.materialTheme,
+          home: SettingsScreen(),
+        ));
   }
 }

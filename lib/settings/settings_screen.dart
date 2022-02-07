@@ -15,92 +15,95 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: BlocBuilder<SettingsScreenBloc, Settings?>(
-                builder: (context, state) {
-                  if (state == null) {
-                    return Container();
-                  }
-                  return IntrinsicHeight(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 64,
-                        ),
-                        Text(
-                          "Wakeup time:",
-                          style: HLTextstyles.label,
-                        ),
-                        GestureDetector(
-                          onTap: () => changeTime(context, state),
-                          child: Text(
-                            state.wakeupTime.format(context),
-                            style: HLTextstyles.display,
+    return Container(
+      color: HLColors.background,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: BlocBuilder<SettingsScreenBloc, Settings?>(
+                  builder: (context, state) {
+                    if (state == null) {
+                      return Container();
+                    }
+                    return IntrinsicHeight(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 64,
                           ),
-                        ),
-                        SizedBox(
-                          height: 32,
-                        ),
-                        Text(
-                          "Light duration:",
-                          style: HLTextstyles.label,
-                        ),
-                        SizedBox(
-                          height: 100,
-                          child: GestureDetector(
-                            onTap: () => changeDuration(context, state),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
-                              textBaseline: TextBaseline.ideographic,
-                              children: [
-                                Text(
-                                  state.lightDuration.inMinutes.toString(),
-                                  style: HLTextstyles.display,
-                                ),
-                                Text(
-                                  " minutes",
-                                  style: HLTextstyles.labelAccent,
-                                )
-                              ],
+                          Text(
+                            "Wakeup time:",
+                            style: HLTextstyles.label,
+                          ),
+                          GestureDetector(
+                            onTap: () => changeTime(context, state),
+                            child: Text(
+                              state.wakeupTime.format(context),
+                              style: HLTextstyles.display,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Text(
+                            "Light duration:",
+                            style: HLTextstyles.label,
+                          ),
+                          SizedBox(
+                            height: 100,
+                            child: GestureDetector(
+                              onTap: () => changeDuration(context, state),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.baseline,
+                                textBaseline: TextBaseline.ideographic,
+                                children: [
+                                  Text(
+                                    state.lightDuration.inMinutes.toString(),
+                                    style: HLTextstyles.display,
+                                  ),
+                                  Text(
+                                    " minutes",
+                                    style: HLTextstyles.labelAccent,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 32,
-          ),
-          GestureDetector(
-            onTap: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => ClockScreen())),
-            child: Container(
-              height: 98,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: HLColors.accent),
-              child: Center(
-                  child: Text(
-                "Start",
-                style: HLTextstyles.button,
-              )),
+            SizedBox(
+              height: 32,
             ),
-          ),
-          SizedBox(
-            height: 32,
-          ),
-        ],
+            GestureDetector(
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => ClockScreen())),
+              child: Container(
+                height: 98,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: HLColors.accent),
+                child: Center(
+                    child: Text(
+                  "Start",
+                  style: HLTextstyles.button,
+                )),
+              ),
+            ),
+            SizedBox(
+              height: 32,
+            ),
+          ],
+        ),
       ),
     );
   }

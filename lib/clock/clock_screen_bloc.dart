@@ -39,6 +39,9 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
   }
 
   void _updateTime() {
+    if(super.isClosed){
+      return;
+    }
     var time = DateTime.now();
     // TODO varible update rate - update often only if nessecary
     var _timer = Timer(
