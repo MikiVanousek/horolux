@@ -88,7 +88,7 @@ class SettingsScreen extends StatelessWidget {
               onTap: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => ClockScreen())),
               child: Container(
-                height: 98,
+                height: 64,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: HLColors.accent),
@@ -133,7 +133,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           onPressed: () {
             bloc.updateSettings(
-                state.copyWith(lightDuration: new Duration(minutes: i)));
+                state.copyWith(lightDuration: Duration(minutes: i)));
             Navigator.of(context).pop();
           },
         ),
@@ -142,6 +142,7 @@ class SettingsScreen extends StatelessWidget {
     showDialog(
         context: context,
         builder: (_) => SimpleDialog(
+              backgroundColor: HLColors.card,
               children: options,
             ));
   }

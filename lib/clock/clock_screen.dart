@@ -24,6 +24,7 @@ class _ClockScreenState extends State<ClockScreen> {
     super.initState();
     // This is broken, I filed an issue on github.
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     Wakelock.enable();
   }
 
