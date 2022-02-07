@@ -16,6 +16,7 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
         wakeupTime = _nextDateTime(settings.wakeupTime),
         super(ClockScreenState(
           settings.wakeupTime.toString(),
+          "",
           HLColors.background,
           HLColors.accent,
         )) {
@@ -32,14 +33,14 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
     }
     var today = DateTime(now.year, now.month, now.day + extraDay,
         timeOfDay.hour, timeOfDay.minute);
-    if(!today.isAfter(now)){
+    if (!today.isAfter(now)) {
       throw Exception('Time of wake up is not in the future!');
     }
     return today;
   }
 
   void _updateTime() {
-    if(super.isClosed){
+    if (super.isClosed) {
       return;
     }
     var time = DateTime.now();
@@ -63,10 +64,15 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
   ClockScreenState _genState(DateTime time) {
     var timeString = _timeString(time);
     Color background, text;
-    if (time.add(lightDuration).isAfter(wakeupTime)) {
-      var progress = 1 -
-          (wakeupTime.millisecondsSinceEpoch - time.millisecondsSinceEpoch) /
-              lightDuration.inMilliseconds;
+
+    Duration sleepLeft = wakeupTime.difference(time);
+    String sleepLeftMsg =
+        (sleepLeft.inHours > 0 ? "${sleepLeft.inHours} hours " : "") +
+            "${sleepLeft.inMinutes % 60} minutes left";
+
+    if (sleepLeft.compareTo(lightDuration) > 0) {
+      var progress =
+          1 - (sleepLeft.inMilliseconds / lightDuration.inMilliseconds);
       background = Color.lerp(HLColors.background, HLColors.accent, progress) ??
           Colors.red;
       text = progress > 0.5 ? HLColors.background : HLColors.accent;
@@ -74,6 +80,6 @@ class ClockScreenBlock extends Cubit<ClockScreenState> {
       background = HLColors.background;
       text = HLColors.accent;
     }
-    return ClockScreenState(timeString, background, text);
+    return ClockScreenState(timeString, sleepLeftMsg, background, text);
   }
 }

@@ -6,7 +6,7 @@ class HLTextstyles {
         color: HLColors.accent,
         decoration: TextDecoration.none,
       ),
-      clock = base.copyWith(fontSize: 48),
+      clock = base.copyWith(fontSize: 72),
       label = base.copyWith(
         fontSize: 24,
         color: HLColors.accentDull,

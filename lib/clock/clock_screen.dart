@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:horolux/clock/clock_screen_bloc.dart';
 import 'package:horolux/clock/clock_screen_state.dart';
+import 'package:horolux/presets/hl_colors.dart';
 import 'package:horolux/presets/hl_text_styles.dart';
 import 'package:horolux/settings/settings.dart';
 import 'package:horolux/settings/settings_screen_bloc.dart';
@@ -44,16 +45,15 @@ class _ClockScreenState extends State<ClockScreen> {
         return BlocProvider(
           create: (context) => ClockScreenBlock(state, context),
           child: BlocBuilder<ClockScreenBlock, ClockScreenState>(
-              builder: (context, state) => Material(
-                    child: Container(
-                      color: state.backgroundColor,
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(32.0),
+              builder: (context, state) => Container(
+                    color: state.backgroundColor,
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(32.0),
+                          child: Material(
+                            color: HLColors.background,
                             child: IconButton(
-                              // onPressed: () => Navigator.of(context).push(
-                              // MaterialPageRoute(builder: (_) => SettingsScreen())),
                               onPressed: () => Navigator.of(context).pop(),
                               icon: Icon(
                                 Icons.settings,
@@ -62,15 +62,25 @@ class _ClockScreenState extends State<ClockScreen> {
                               ),
                             ),
                           ),
-                          Center(
-                            child: Text(
-                              state.time,
-                              style: HLTextstyles.clock
-                                  .copyWith(color: state.accentColor),
-                            ),
+                        ),
+                        Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                state.time,
+                                style: HLTextstyles.clock
+                                    .copyWith(color: state.accentColor),
+                              ),
+                              Text(
+                                state.sleepLeftMessage,
+                                style: HLTextstyles.label
+                                    .copyWith(color: state.accentColor),
+                              )
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   )),
         );

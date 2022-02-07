@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_material_pickers/helpers/show_scroll_picker.dart';
 import 'package:horolux/clock/clock_screen.dart';
-import 'package:horolux/main.dart';
 import 'package:horolux/presets/hl_colors.dart';
 import 'package:horolux/presets/hl_text_styles.dart';
 import 'package:horolux/settings/settings.dart';
