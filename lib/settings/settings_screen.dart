@@ -120,14 +120,29 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void changeDuration(BuildContext context, Settings state) async {
-    int minutes = await showMaterialScrollPicker<int>(
-          context: context,
-          items: avalibleDurations,
-          selectedItem: state.lightDuration.inMinutes,
-        ) ??
-        state.lightDuration.inMinutes;
-    var bloc = BlocProvider.of<SettingsScreenBloc>(context);
-    bloc.updateSettings(
-        state.copyWith(lightDuration: Duration(minutes: minutes)));
+    List<SimpleDialogOption> options = [];
+    final bloc = BlocProvider.of<SettingsScreenBloc>(context);
+    for (var i in avalibleDurations) {
+      options.add(
+        SimpleDialogOption(
+          child: Text(
+            i.toString() + ' minutes',
+            style: state.lightDuration.inMinutes == i
+                ? HLTextstyles.labelAccent
+                : HLTextstyles.label,
+          ),
+          onPressed: () {
+            bloc.updateSettings(
+                state.copyWith(lightDuration: new Duration(minutes: i)));
+            Navigator.of(context).pop();
+          },
+        ),
+      );
+    }
+    showDialog(
+        context: context,
+        builder: (_) => SimpleDialog(
+              children: options,
+            ));
   }
 }
