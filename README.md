@@ -1,4 +1,4 @@
-# horolux
+# Horolux
 
 A new Flutter project.
 
